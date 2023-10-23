@@ -15,7 +15,7 @@ struct DetailView: View {
     var body: some View {
         List {
             Section(header: Text("Meeting Info")) { //List 내에서 시각적으로 구분해주는 주는 Section -> 컨텐츠 내용 자르기 & 그룹화
-                NavigationLink(destination: MeetingView()){ //nevigation hierarchy 세팅하기
+                NavigationLink(destination: MeetingView(scrum: $scrum)){ //nevigation hierarchy 세팅하기
                     Label("Start Meeting", systemImage: "timer") //MARK: Label 이용하기
                         .font(.headline)
                         .foregroundColor(.accentColor)
