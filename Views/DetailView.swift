@@ -47,6 +47,7 @@ struct DetailView: View {
         .toolbar { //MARK: toolbar 사용하기
             Button("Edit") {
                 isPresentingEditView = true
+                editingScrum = scrum //여기 추가했다고 색깔변경이 적용된다!
             }
         }
         .sheet(isPresented: $isPresentingEditView, content: {  //MARK: sheet
