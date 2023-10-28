@@ -24,18 +24,30 @@ struct MeetingFooterView: View {
     //allSatisfy() 메소드: 콜렉션의 모든 원소가 특정조건을 만족시키는지 확인.
     private var isLastSpeaker: Bool {
         //return speakers.dropLast().allSatisfy { $0.isCompleted }
-        return speakers.dropLast().reduce(true) { $0 && $1.isCompleted}
+        return speakers.dropLast().reduce(true) { $0 && $1.isCompleted} //위의 주석처리된 줄이랑 같은 표현
+    }
+    
+    private var speakerText: String {
+        guard let speakerNumber = speakerNumber else { return "No more speakers"}
+        return "Speaker \(speakerNumber) of \(speakers.count)"
     }
     
     var body: some View {
-        HStack {
-            Text("Speaker 1 of 3")
-            Spacer()
-            Button(action: {}) {
-                Image(systemName: "forward.fill")
+        VStack {
+            HStack {
+                if isLastSpeaker {
+                    Text("Last Speaker")
+                } else {
+                    Text(speakerText)
+                    Spacer()
+                    Button(action: skipAction) {
+                        Image(systemName: "forward.fill")
+                    }
+                    .accessibilityLabel("Next speaker")
+                }
             }
-            .accessibilityLabel("Next speaker")
         }
+        .padding([.bottom, .horizontal])
     }
 }
 
